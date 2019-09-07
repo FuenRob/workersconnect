@@ -1,4 +1,4 @@
-## Laranet
+## Workers Connect
 
 It is an intranet platform made with Laravel and Docker.
 
