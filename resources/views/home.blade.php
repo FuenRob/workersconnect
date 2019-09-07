@@ -15,7 +15,7 @@
                     @endif
 
                     <p>You are logged in!</p>
-                    <a href="{{ route('users') }}">Ver usuarios</a>
+                    <a href="{{ route('users.index') }}">Ver usuarios</a>
                     <a href="{{ route('roles') }}">Ver roles</a>
                 </div>
             </div>

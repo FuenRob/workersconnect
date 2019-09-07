@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <div class="float-left">{{ __('Listado de usuarios') }}</div>
                     <div class="float-right">
-                        <a href="{{ route('new-user') }}" class="btn btn-primary">{{ __('Añadir') }}</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-primary">{{ __('Añadir') }}</a>
                     </div>
                 </div>
 
@@ -26,6 +26,7 @@
                             <th><strong>Nombre</strong></th>
                             <th><strong>Correo Electrónico</strong></th>
                             <th><strong>Rol</strong></th>
+                            <th><strong>Acciones</strong></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,7 +41,16 @@
                                         {{$rol->name}}
                                     @endif
                                 @endforeach
-                                </th>               
+                                </th> 
+                                <th>
+                                    <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
+                                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </th>             
                             </tr>
                         @endforeach
                         </tbody>
