@@ -15,3 +15,7 @@ nginx/*
 php/*
 mysql/*
 composer.lock
+package-lock.json
+public/fonts/vendor/*
+public/js/*
+public/css/*

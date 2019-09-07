@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -44,11 +44,11 @@
                                 </th>
                                 <th>
                                     <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+                                        <a class="btn" href="{{ route('users.show',$user->id) }}"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                        <a class="btn" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                 </th>
                             </tr>
