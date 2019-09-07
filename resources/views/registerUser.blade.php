@@ -5,16 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                <div class="card-header">{{ __('2º Registro de tu usuario') }}</div>
+                <div class="card-header">{{ __('Nuevo usuario') }}</div>
 
                 <div class="card-body">
                     
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('new-user') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -68,22 +63,32 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="id_role" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
+                            
                             <div class="col-md-6">
-                                <input id="id_company" type="hidden" class="form-control" name="id_company" value="{{ app('request')->input('id_company') }}">
+                                <select class="form-control" name="id_role" id="id_role">
+                                @foreach($roles as $keyRol => $rol)
+                                    <option value="{{$rol->id}}">{{$rol->name}}</option>
+                                @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <input id="id_role" type="hidden" class="form-control" name="id_role" value="1">
+                                <input id="id_company" type="hidden" class="form-control" name="id_company" value="{{ $user->id_company }}">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+
+                            <div class="col-md-2 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Registrar') }}
                                 </button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ route('users') }}" class="btn btn-primary">{{ __('Volver') }}</a>
                             </div>
                         </div>
                     </form>

@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <p>You are logged in!</p>
+                    <a href="{{ route('users') }}">Ver usuarios</a>
+                    <a href="{{ route('roles') }}">Ver roles</a>
                 </div>
             </div>
         </div>
