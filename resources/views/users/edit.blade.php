@@ -9,7 +9,8 @@
 
                 <div class="card-body">
                     
-                    <form method="GET" action="{{ route('users.update',$user->id) }}">
+                    <form method="POST" action="{{ route('users.update',$user->id) }}">
+                        @method('PATCH')
                         @csrf
 
                         <div class="form-group row">
@@ -84,7 +85,7 @@
 
                             <div class="col-md-2 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar') }}
+                                    {{ __('Actualizar') }}
                                 </button>
                             </div>
                             <div class="col-md-6">

@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Nuevo Rol') }}</div>
 
                 <div class="card-body">
-                <form method="POST" action="/new-role">
+                <form method="POST" action="{{ route('roles.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -32,7 +32,7 @@
                                 </button>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('roles') }}" class="btn btn-primary">{{ __('Volver') }}</a>
+                                <a href="{{ route('roles.index') }}" class="btn btn-primary">{{ __('Volver') }}</a>
                             </div>
                         </div>
                     </form>

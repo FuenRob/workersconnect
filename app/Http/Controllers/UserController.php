@@ -83,16 +83,22 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'id_role' => ['required']
-            ]);
-            $user->update($request->all());
-            return redirect()->route('users.index')->with('status', 'Usuario editado con.');
+        ]);
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = $request->get('password');
+        $user->id_role = $request->get('id_role');
+        $user->id_company = $request->get('id_company');
+        $user->save();
+        return redirect()->route('users.index')->with('status', 'Usuario editado con.');
     }
   
     /**

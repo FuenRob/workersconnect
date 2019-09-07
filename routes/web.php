@@ -19,20 +19,10 @@ Auth::routes();
 
 /* Dashboard */
 Route::get('/home', 'HomeController@index')->name('home');
-
-/* View tables */
-
-Route::get('/roles', function () {
-    $roles = DB::table('roles')->get();
-    return view('roles', ['roles' => $roles]);
-})->name('roles');
-
+/* Users views */
 Route::resource('users','UserController');
-
-
-Route::get('/new-role', function () {
-    return view('registerRole');
-})->name('new-role');
+/* Roles views */
+Route::resource('roles','RoleController');
 
 Route::get('/register-company', function () {
     return view('registerCompany');
@@ -40,4 +30,3 @@ Route::get('/register-company', function () {
 
 /* Routes for register datas */
 Route::post('/register-company', 'CompanyController@submit');
-Route::post('/new-role', 'RoleController@submit');

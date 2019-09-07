@@ -16,7 +16,7 @@
 
                     <p>You are logged in!</p>
                     <a href="{{ route('users.index') }}">Ver usuarios</a>
-                    <a href="{{ route('roles') }}">Ver roles</a>
+                    <a href="{{ route('roles.index') }}">Ver roles</a>
                 </div>
             </div>
         </div>

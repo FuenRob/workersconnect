@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <div class="float-left">{{ __('Listado de roles') }}</div>
                     <div class="float-right">
-                        <a href="{{ route('new-role') }}" class="btn btn-primary">{{ __('Añadir') }}</a>
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary">{{ __('Añadir') }}</a>
                     </div>
                 </div>
 
@@ -24,13 +24,23 @@
                         <tr>
                             <th><strong>ID</strong></th>
                             <th><strong>Rol</strong></th>
+                            <th><strong>Acciones</strong></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($roles as $key => $rol)
                             <tr>    
                                 <th>{{$rol->id}}</th>
-                                <th>{{$rol->name}}</th>             
+                                <th>{{$rol->name}}</th>
+                                <th>
+                                    <form action="{{ route('roles.destroy',$rol->id) }}" method="POST">
+                                        <a class="btn btn-info" href="{{ route('roles.show',$rol->id) }}">Show</a>
+                                        <a class="btn btn-primary" href="{{ route('roles.edit',$rol->id) }}">Edit</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </th>
                             </tr>
                         @endforeach
                         </tbody>

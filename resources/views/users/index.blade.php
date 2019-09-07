@@ -41,7 +41,7 @@
                                         {{$rol->name}}
                                     @endif
                                 @endforeach
-                                </th> 
+                                </th>
                                 <th>
                                     <form action="{{ route('users.destroy',$user->id) }}" method="POST">
                                         <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
@@ -50,7 +50,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
-                                </th>             
+                                </th>
                             </tr>
                         @endforeach
                         </tbody>
