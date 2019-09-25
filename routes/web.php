@@ -26,7 +26,7 @@ Route::resource('roles','RoleController');
 
 Route::get('/register-company', function () {
     return view('registerCompany');
-});
+})->name('register-company');
 
 /* Routes for register datas */
 Route::post('/register-company', 'CompanyController@submit');

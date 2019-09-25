@@ -5,6 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="card-header">{{ __('1º Registra tu empresa') }}</div>
 
                 <div class="card-body">

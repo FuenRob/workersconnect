@@ -8,6 +8,12 @@ use App\Company;
 class CompanyController extends Controller
 {
     public function submit(Request $request){
+        
+        $companies = Company::all();
+        foreach($companies as $company){
+            if(strtoupper($request->cif) ==  strtoupper($company->cif))
+                return redirect()->route('register-company')->with('error', 'CIF ya registrado, ponte en contacto con el administrador.')->withInput($request->input());
+        }
         $this->validate($request, [
             'name' => 'required',
             'cif' => 'required',
