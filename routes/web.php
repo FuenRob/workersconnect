@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+/* Dashboard */
+Route::get('/home', 'HomeController@index')->name('home');
+/* Users views */
+Route::resource('users','UserController');
+/* Roles views */
+Route::resource('roles','RoleController');
+
+Route::get('/register-company', function () {
+    return view('registerCompany');
+})->name('register-company');
+
+/* Routes for register datas */
+Route::post('/register-company', 'CompanyController@submit');
