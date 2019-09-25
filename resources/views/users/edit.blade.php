@@ -89,7 +89,7 @@
                                 </button>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('users.index') }}" class="btn btn-primary">{{ __('Volver') }}</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-primary">{{ __('Volver') }}</a>
                             </div>
                         </div>
                     </form>
