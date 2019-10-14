@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users','UserController');
 /* Roles views */
 Route::resource('roles','RoleController');
+/* Groups views */
+Route::resource('groups','GroupController');
 
 Route::get('/register-company', function () {
     return view('registerCompany');
