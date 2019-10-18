@@ -5,11 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Nuevo grupo') }}</div>
+                <div class="card-header">{{ __('Nuevo equipo') }}</div>
 
                 <div class="card-body">
                     
-                    <form method="POST" action="{{ route('groups.store') }}">
+                    <form method="POST" action="{{ route('teams.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -27,25 +27,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
-                            <div class="col-md-6">
-                                <textarea rows="4" cols="54" id="description" name="description">{{ old('description') }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="id_team" class="col-md-4 col-form-label text-md-right">{{ __('Equipo') }}</label>
-                            
-                            <div class="col-md-6">
-                                <select class="form-control" name="id_team" id="id_team">
-                                @foreach($teams as $keyTeam => $team)
-                                    <option value="{{$team->id}}">{{$team->name}}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <div class="col-md-6">
                                 <input id="id_company" type="hidden" class="form-control" name="id_company" value="{{ $user->id_company }}">
                             </div>
@@ -59,7 +40,7 @@
                                 </button>
                             </div>
                             <div class="col-md-6">
-                                <a href="/groups" class="btn btn-primary">{{ __('Volver') }}</a>
+                                <a href="/teams" class="btn btn-primary">{{ __('Volver') }}</a>
                             </div>
                         </div>
                     </form>

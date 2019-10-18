@@ -18,6 +18,7 @@
                     <a href="{{ route('users.index') }}">Ver usuarios</a>
                     <a href="{{ route('roles.index') }}">Ver roles</a>
                     <a href="{{ route('groups.index') }}">Ver grupos</a>
+                    <a href="{{ route('teams.index') }}">Ver equipos</a>
                 </div>
             </div>
         </div>

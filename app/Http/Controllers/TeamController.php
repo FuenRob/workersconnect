@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Group;
-use App\Company;
 use App\Team;
+use App\Company;
 
-class GroupController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +17,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::latest()->paginate(5);
+        $teams = Team::latest()->paginate(5);
         $companies = Company::all();
-        $teams = Team::all();
-        return view('groups.index',compact('groups', 'companies', 'teams'))
+        return view('teams.index',compact('teams', 'companies'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
    
@@ -32,8 +30,7 @@ class GroupController extends Controller
      */
     public function create(Request $request){
         $user = Auth::user();
-        $teams = Team::all();
-        return view('groups.create',compact('groups', 'user', 'teams'));
+        return view('teams.create',compact('teams','user'));
     }
 
     /**
@@ -47,49 +44,47 @@ class GroupController extends Controller
             'name' => 'required',
         ]);
         $user = Auth::user();
-        $idGroup = Group::create($request->all())->id;
+        $idTeam = Team::create($request->all())->id;
         $dateNow = date("Y-m-d");
-        DB::insert('INSERT INTO groups_users (id_group, id_user, is_manager, created_at, updated_at) values (?, ?, ?, ?, ?)', [$idGroup, $user->id, true, $dateNow, $dateNow]);
+        DB::insert('INSERT INTO teams_users (id_team, id_user, is_manager, created_at, updated_at) values (?, ?, ?, ?, ?)', [$idTeam, $user->id, true, $dateNow, $dateNow]);
         
-        return redirect()->route('groups.index')->with('status', 'Grupo creado con éxito.');
+        return redirect()->route('teams.index')->with('status', 'Equipo creado con éxito.');
     }
    
     /**
      * Display the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Team $team)
     {
-        $usersInGroup = DB::table('users')
-                            ->join('groups_users', 'users.id', '=', 'groups_users.id_user')
-                            ->where('groups_users.id_group', $group->id)
+        $usersInTeam = DB::table('users')
+                            ->join('teams_users', 'users.id', '=', 'teams_users.id_user')
+                            ->where('teams_users.id_team', $team->id)
                             ->select('users.*')
                             ->get();
 
         $companies = Company::all();
-        $teams = Team::all();
-        return view('groups.show',compact('group', 'companies', 'usersInGroup', 'teams'));
+        return view('teams.show',compact('team', 'companies','usersInTeam'));
     }
    
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit(Team $team)
     {
-        $teams = Team::all();
-        return view('groups.edit',compact('group', 'teams'));
+        return view('teams.edit',compact('team'));
     }
   
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -98,25 +93,23 @@ class GroupController extends Controller
             'name' => 'required',
         ]);
 
-        $group = Group::find($id);
-        $group->name = $request->get('name');
-        $group->description = $request->get('description');
-        $group->id_team = $request->get('id_team');
-        $group->save();
+        $team = Team::find($id);
+        $team->name = $request->get('name');
+        $team->save();
         
-        return redirect()->route('groups.index')->with('status', 'Grupo editado con éxito.');
+        return redirect()->route('teams.index')->with('status', 'Equipo editado con éxito.');
     }
   
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Group  $group
+     * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy(Team $team)
     {
-        $group->delete();
+        $team->delete();
   
-        return redirect()->route('groups.index')->with('status','Group eliminado');
+        return redirect()->route('teams.index')->with('status','Equipo eliminado');
     }
 }

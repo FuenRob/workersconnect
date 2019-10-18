@@ -9,6 +9,6 @@ class Group extends Model
     public $table = 'groups';
 
     public $fillable = [
-        'name', 'description', 'id_company'
+        'name', 'description', 'id_company', 'id_team'
     ];
 }

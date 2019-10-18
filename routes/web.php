@@ -25,6 +25,8 @@ Route::resource('users','UserController');
 Route::resource('roles','RoleController');
 /* Groups views */
 Route::resource('groups','GroupController');
+/* Teams views */
+Route::resource('teams','TeamController');
 
 Route::get('/register-company', function () {
     return view('registerCompany');

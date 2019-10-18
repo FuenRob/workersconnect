@@ -5,11 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Editar grupo') }}</div>
+                <div class="card-header">{{ __('Editar equipo') }}</div>
 
                 <div class="card-body">
                     
-                    <form method="POST" action="{{ route('groups.update',$group->id) }}">
+                    <form method="POST" action="{{ route('teams.update',$team->id) }}">
                         @method('PATCH')
                         @csrf
 
@@ -17,7 +17,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $group->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $team->name }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -28,27 +28,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
                             <div class="col-md-6">
-                                <textarea rows="4" cols="54" id="description" name="description">{{ $group->description }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="id_team" class="col-md-4 col-form-label text-md-right">{{ __('Equipo') }}</label>
-                            
-                            <div class="col-md-6">
-                                <select class="form-control" name="id_team" id="id_team">
-                                @foreach($teams as $keyTeam => $team)
-                                    <option value="{{$team->id}}" @if ($team->id == $group->id_team) selected @endif>{{$team->name}}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <input id="id_company" type="hidden" class="form-control" name="id_company" value="{{ $group->id_company }}">
+                                <input id="id_company" type="hidden" class="form-control" name="id_company" value="{{ $team->id_company }}">
                             </div>
                         </div>
 
