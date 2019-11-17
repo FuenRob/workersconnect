@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Role;
 use App\Company;
@@ -47,7 +48,13 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'id_role' => ['required']
             ]);
-            User::create($request->all());
+            User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+                'id_company' => $request['id_company'],
+                'id_role' => $request['id_role'],
+            ]);
             return redirect()->route('users.index')->with('status', 'Usuario creado con éxito.');
     }
    
@@ -94,7 +101,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = $request->get('password');
+        $user->password = Hash::make($request->get('password'));
         $user->id_role = $request->get('id_role');
         $user->id_company = $request->get('id_company');
         $user->save();
