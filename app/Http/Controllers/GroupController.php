@@ -62,15 +62,16 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+        $user = Auth::user();
         $usersInGroup = DB::table('users')
                             ->join('groups_users', 'users.id', '=', 'groups_users.id_user')
                             ->where('groups_users.id_group', $group->id)
                             ->select('users.*')
                             ->get();
-
+        $userFollowGroup = $this->getUserFollowGroup($user->id, $group->id);
         $companies = Company::all();
         $teams = Team::all();
-        return view('groups.show',compact('group', 'companies', 'usersInGroup', 'teams'));
+        return view('groups.show',compact('group', 'companies', 'usersInGroup', 'userFollowGroup', 'teams'));
     }
    
     /**
@@ -118,5 +119,48 @@ class GroupController extends Controller
         $group->delete();
   
         return redirect()->route('groups.index')->with('status','Group eliminado');
+    }
+
+    /**
+     * Follow the group
+     *
+     * @param  id_group $id
+     * @return \Illuminate\Http\Response
+     */
+    public function followGroup($id){
+        $user = Auth::user();
+        $dateNow = date("Y-m-d");
+        DB::insert('INSERT INTO groups_users (id_group, id_user, is_manager, created_at, updated_at) values (?, ?, ?, ?, ?)', [$id, $user->id, false, $dateNow, $dateNow]);
+        return redirect()->route('groups.show', ['id_company' => $id]);
+    }
+
+    /**
+     * Unfollow the group
+     *
+     * @param  id_group $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unfollowGroup($id){
+        $user = Auth::user();
+        DB::table('groups_users')->where('id_group', '=', $id)->where('id_user', '=', $user->id)->delete();
+        return redirect()->route('groups.show', ['id_company' => $id]);
+    }
+
+    /**
+     * Get users follow the group
+     *
+     * @param  id_group $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getUserFollowGroup($id_user, $id_group){
+        $id_user = DB::table('groups_users')
+                    ->where('groups_users.id_group', $id_group)
+                    ->where('groups_users.id_user', $id_user)
+                    ->select('groups_users.id_user')
+                    ->get();
+        if(count($id_user) > 0)
+            return true;
+        else
+            return false;
     }
 }

@@ -23,10 +23,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users','UserController');
 /* Roles views */
 Route::resource('roles','RoleController');
-/* Groups views */
-Route::resource('groups','GroupController');
 /* Teams views */
 Route::resource('teams','TeamController');
+/* Groups views */
+Route::resource('groups','GroupController');
+Route::get('/follow-group/{id}', 'GroupController@followGroup')->where('id', '[0-9]+');;
+Route::get('/unfollow-group/{id}', 'GroupController@unfollowGroup')->where('id', '[0-9]+');;
+
 
 Route::get('/register-company', function () {
     return view('registerCompany');

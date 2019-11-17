@@ -18,7 +18,7 @@ class CompanyController extends Controller
             'name' => 'required',
             'cif' => 'required',
             ]);
-            $id_company = Company::create($request->all());
-            return redirect()->route('register', ['id_company' => $id_company])->with('status', 'Empresa creada con éxito.');
+        $id_company = Company::create($request->all());
+        return redirect()->route('register', ['id_company' => $id_company])->with('status', 'Empresa creada con éxito.');
     }
 }

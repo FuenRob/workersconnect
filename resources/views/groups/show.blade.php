@@ -62,6 +62,15 @@
                         <div class="col-md-2 offset-md-4">
                             <a href="{{ route('groups.index') }}" class="btn btn-primary">{{ __('Volver') }}</a>
                         </div>
+                        @if($userFollowGroup)
+                            <div class="col-md-2 offset-md-4">
+                                <a href="/unfollow-group/{{ $group->id }}" class="btn btn-primary">{{ __('Dejar de seguir') }}</a>
+                            </div>
+                        @else
+                            <div class="col-md-2 offset-md-4">
+                                <a href="/follow-group/{{ $group->id }}" class="btn btn-primary">{{ __('Seguir') }}</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
