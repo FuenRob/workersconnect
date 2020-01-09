@@ -48,14 +48,14 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'id_role' => ['required']
             ]);
-            User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-                'id_company' => $request['id_company'],
-                'id_role' => $request['id_role'],
-            ]);
-            return redirect()->route('users.index')->with('status', 'Usuario creado con éxito.');
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'id_company' => $request['id_company'],
+            'id_role' => $request['id_role'],
+        ]);
+        return redirect()->route('users.index')->with('status', 'Usuario creado con éxito.');
     }
    
     /**
@@ -119,5 +119,16 @@ class UserController extends Controller
         $user->delete();
   
         return redirect()->route('users.index')->with('status','Usuario eliminado');
+    }
+
+    /**
+     * Get all user in JSON object
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function getUsers(Request $request){
+        $search = $request->get('term');
+        $users = User::where('name', 'LIKE', '%'. $search. '%')->get();
+        return response()->json($users);
     }
 }

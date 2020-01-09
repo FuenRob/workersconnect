@@ -19,6 +19,7 @@
                     <a href="{{ route('roles.index') }}">Ver roles</a>
                     <a href="{{ route('groups.index') }}">Ver grupos</a>
                     <a href="{{ route('teams.index') }}">Ver equipos</a>
+                    <a href="{{ route('holidays.index') }}">Ver vacaciones</a>
                 </div>
             </div>
         </div>
